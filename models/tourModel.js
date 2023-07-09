@@ -164,12 +164,12 @@ toursSchema.post('save', function (doc, next) {
 }); */
 
 // Query middleware
-toursSchema.pre(/^find/, function (next) {
-    this.find({ secretTour: { $ne: true } });
+// toursSchema.pre(/^find/, function (next) {
+//     this.find({ secretTour: { $ne: true } });
 
-    this.start = Date.now();
-    next();
-});
+//     this.start = Date.now();
+//     next();
+// });
 
 toursSchema.pre(/^find/, function (next) {
     this.populate({
@@ -179,10 +179,10 @@ toursSchema.pre(/^find/, function (next) {
     next();
 });
 
-toursSchema.post(/^find/, function (docs, next) {
-    console.log(`Query took ${Date.now() - this.start} ms`);
-    next();
-});
+// toursSchema.post(/^find/, function (docs, next) {
+//     console.log(`Query took ${Date.now() - this.start} ms`);
+//     next();
+// });
 
 // Aggregation middleware
 // toursSchema.pre('aggregate', function (next) {
