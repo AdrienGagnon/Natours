@@ -2,18 +2,6 @@ const mongoose = require('mongoose');
 
 const dotenv = require('dotenv');
 
-(function () {
-    var childProcess = require('child_process');
-    var oldSpawn = childProcess.spawn;
-    function mySpawn() {
-        console.log('spawn called');
-        console.log(arguments);
-        var result = oldSpawn.apply(this, arguments);
-        return result;
-    }
-    childProcess.spawn = mySpawn;
-})();
-
 process.on('uncaughtException', (err) => {
     console.log('uncaught exception, shutting down...');
     console.log(err.name, err.message);
@@ -49,5 +37,12 @@ process.on('unhandledRejection', (err) => {
     console.log(err.name, err.message);
     server.close(() => {
         process.exit(1);
+    });
+});
+
+process.on('SIGTERM', () => {
+    console.log('SIGTERM RECEIVED. Shutting down gracefully');
+    server.close(() => {
+        console.log('Process terminated!');
     });
 });
