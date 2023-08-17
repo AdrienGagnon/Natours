@@ -321,6 +321,8 @@ body {
         -webkit-box-direction: normal;
         -ms-flex-direction: column;
         flex-direction: column;
+        height: auto;
+        padding: 1rem;
     }
 }
 .header__logo img {
@@ -1105,8 +1107,22 @@ body {
     max-width: 120rem;
     margin: 0 auto;
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     grid-gap: 7rem;
+}
+
+@media screen and (max-width: 500px) {
+    .main {
+        padding: 1rem 0;
+    }
+    .card-container {
+        display: flex;
+        flex-direction: column;
+        grid-gap: 1rem;
+    }
+    .card {
+        width: 100%;
+    }
 }
 
 .card {
